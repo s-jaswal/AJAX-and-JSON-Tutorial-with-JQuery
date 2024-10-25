@@ -1,23 +1,26 @@
 let pageCounter = 1;
-const animalContainer = $("#animal-info");
-const btn = $("#btn");
+const animalContainer = $('#animal-info');
+const btn = $('#btn');
+
 
 btn.on('click', function () {
     $.ajax({
-        url: `https://learnwebcode.gtihub.io/json-example/animals-${pageCounter}.json`,
+
+        url: `https:learnwebcode.github.io/json-example/animals-${pageCounter}.json`,
         method: 'GET',
         success: function (data) {
             renderHTML(data)
             pageCounter++
             if (pageCounter > 3) {
-                btn.addClass('hide-me')
+                btn.addClass('hide-me');
             }
         },
         error: function () {
-            console.log('Connection Error')
+            console.log("Connection error");
         }
+
     });
-})
+});
 
 
 function renderHTML(data) {
@@ -25,16 +28,13 @@ function renderHTML(data) {
     data.forEach(function (animal) {
         htmlString += `<p>${animal.name} is a ${animal.species} that likes to eat`
         animal.foods.likes.forEach(function (like, index) {
-            htmlString += index === 0 ? like : `and ${like}`
+            htmlString += index === 0 ? like : ` and ${like}`
         })
-        htmlString += ' and dislikes'
-        animal.foods.dislikes.forEach(function (dislike, index) {
-            htmlString += index === 0 ? dislike : `and ${dislike}`
+        htmlString += 'and dislikes'
+        animal.foods.dislikes.forEach(function (dislikes, index) {
+            htmlString += index === 0 ? dislikes : `and${dislikes}`
         })
         htmlString += '.</p>'
-
     })
-    animalContainer.append(htmlString);
+    animalContainer.append(htmlString)
 }
-
-
